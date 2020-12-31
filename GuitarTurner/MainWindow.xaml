@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GuitarTurner"
         mc:Ignorable="d"
-        Title="GuitarTurner.NET by Gadz" 
+        Title="GuitarTurner" 
         Height="383" Width="360" 
         WindowStartupLocation="CenterScreen" 
         WindowStyle="ToolWindow" 

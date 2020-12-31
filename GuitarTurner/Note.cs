@@ -2,14 +2,14 @@
 
 namespace GuitarTurner
 {
-    class Note
+    record Note
     {
-        public string Name { get; set; }
-        public float Frequency { get; set; }
+        public string Symbol { get; init; }
+        public float Frequency { get; init; }
 
         public Note(string name, float frequency)
         {
-            Name = name;
+            Symbol = name;
             Frequency = frequency;
         }
 
@@ -25,7 +25,7 @@ namespace GuitarTurner
 
         public override string ToString()
         {
-            return $"{Name} {Frequency}";
+            return $"{Symbol} {Frequency}";
         }
     }
 }

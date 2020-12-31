@@ -7,25 +7,10 @@ namespace GuitarTurner
     public class TurnerViewModel : INotifyPropertyChanged
     {
         static List<Note> _notes = new List<Note>();
-        static Dictionary<string, float> noteBaseFreqs = new Dictionary<string, float>()
-            {
-                { "C", 16.35f },
-                { "C#", 17.32f },
-                { "D", 18.35f },
-                { "Eb", 19.45f },
-                { "E", 20.60f },
-                { "F", 21.83f },
-                { "F#", 23.12f },
-                { "G", 24.50f },
-                { "G#", 25.96f },
-                { "A", 27.50f },
-                { "Bb", 29.14f },
-                { "B", 30.87f },
-            };
 
         float frequency;
-        string note;
-        double position;
+        string note = ".";
+        double pitch = 160;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -33,9 +18,9 @@ namespace GuitarTurner
         {
             float baseFreq;
 
-            foreach (var note in noteBaseFreqs)
+            foreach (var note in Notes.GetAllGuitarNotes())
             {
-                baseFreq = note.Value;
+                baseFreq = note.Frequency;
 
                 for (int i = 0; i < 9; i++)
                 {
@@ -56,7 +41,7 @@ namespace GuitarTurner
 
                 if (n != null)
                 {
-                    Note = n.Name;
+                    Note = n.Symbol;
                     Distance = n.Distance(frequency);
                     Pitch = System.Math.Abs(160 + Distance);
                     BackgroundColor = n.Match(frequency) ? "#00ff00" : "#000000";
@@ -77,10 +62,10 @@ namespace GuitarTurner
         }
         public double Pitch
         {
-            get { return position; }
+            get { return pitch; }
             set
             {
-                position = value;
+                pitch = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Pitch)));
             }
         }

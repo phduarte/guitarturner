@@ -23,8 +23,6 @@
             {
                 prevBuffer = new float[frames];
             }
-            float secCor = 0;
-            int secLag = 0;
 
             float maxCorr = 0;
             int maxLag = 0;
@@ -44,21 +42,16 @@
                     maxCorr = corr;
                     maxLag = lag;
                 }
-                if (corr >= 0.9 * maxCorr)
-                {
-                    secCor = corr;
-                    secLag = lag;
-                }
             }
             for (int n = 0; n < frames; n++)
             {
                 prevBuffer[n] = buffer[n];
             }
             float noiseThreshold = frames / 1000f;
-            //Debug.WriteLine(String.Format("Max Corr: {0} ({1}), Sec Corr: {2} ({3})", this.sampleRate / maxLag, maxCorr, this.sampleRate / secLag, secCor));
+
             if (maxCorr < noiseThreshold || maxLag == 0) return 0.0f;
-            //return 44100.0f / secLag;   //--works better for singing
-            return this.sampleRate / maxLag;
+
+            return sampleRate / maxLag;
         }
     }
 }
