@@ -6,3 +6,5 @@
 */bin/Debug/netcoreapp3.1
 */obj
 /GuitarTurner/bin/Debug/net5.0-windows
+/GuitarTurner/bin/Release/net5.0-windows/ref
+/GuitarTurner/bin/Release/net5.0-windows
