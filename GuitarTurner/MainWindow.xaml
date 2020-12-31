@@ -1,0 +1,55 @@
+﻿<Window x:Class="GuitarTurner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GuitarTurner"
+        mc:Ignorable="d"
+        Title="GuitarTurner.NET by Gadz" 
+        Height="383" Width="360" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="ToolWindow" 
+        ResizeMode="NoResize" 
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="321"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="331"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Orientation="Vertical">
+                <Canvas Height="20" Margin="0,10,0,20">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="-50" Margin="50,0,0,0" Width="195" TextAlignment="Left"/>
+                        <TextBlock Text="+50" TextAlignment="Right"/>
+                    </StackPanel>
+                    <Line X1="60" X2="260" Y1="20" Y2="20" 
+                      Fill="Black"
+                      Stroke="Black"
+                      StrokeThickness="5"/>
+                    <Line X1="{Binding Pitch}" X2="160" Y1="0" Y2="100" 
+                      Fill="Black"
+                      Stroke="Black"
+                      StrokeThickness="5"/>
+                    <!--<Line X1="{Binding Pitch}" X2="{Binding Pitch}" Y1="0" Y2="40" 
+                      Fill="Black"
+                      Stroke="Black"
+                      StrokeThickness="5"/>-->
+                </Canvas>
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Note}" FontSize="170" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="{Binding BackgroundColor}" />
+                </StackPanel>
+                <TextBlock Text="{Binding Frequency}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>
