@@ -1,3 +1,5 @@
 # GuitarTurner
 
-Afinador de guitarra escrito em C# .NET Core e WPF.
+Afinador de guitarra em WPF com C# e .NET 5.
+
+![arquivo](screen.png)
