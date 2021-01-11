@@ -8,10 +8,6 @@ namespace GuitarTurner
     {
         static List<Note> _notes = new List<Note>();
 
-        float frequency;
-        string note = ".";
-        double pitch = 160;
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         static TurnerViewModel()
@@ -30,6 +26,7 @@ namespace GuitarTurner
             }
         }
 
+        float frequency;
         public float Frequency
         {
             get { return frequency; }
@@ -51,6 +48,7 @@ namespace GuitarTurner
             }
         }
 
+        string note = ".";
         public string Note
         {
             get { return note; }
@@ -60,6 +58,8 @@ namespace GuitarTurner
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Note)));
             }
         }
+
+        double pitch = 160;
         public double Pitch
         {
             get { return pitch; }
