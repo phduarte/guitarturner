@@ -5,9 +5,9 @@ namespace GuitarTurner
 {
     public class Pitch
     {
-        IWaveProvider source;
-        WaveBuffer waveBuffer;
-        Autocorrelator pitchDetector;
+        readonly IWaveProvider _source;
+        readonly WaveBuffer _waveBuffer;
+        readonly Autocorrelator _pitchDetector;
 
         public Pitch(IWaveProvider source)
         {
@@ -26,19 +26,14 @@ namespace GuitarTurner
                 throw new ArgumentException("Source must be a mono input source");
             }
 
-            this.source = source;
-            this.pitchDetector = new Autocorrelator(source.WaveFormat.SampleRate);
-            this.waveBuffer = new WaveBuffer(8192);
+            _source = source;
+            _pitchDetector = new Autocorrelator(source.WaveFormat.SampleRate);
+            _waveBuffer = new WaveBuffer(8192);
         }
 
         public float Get(byte[] buffer)
         {
-            if (waveBuffer == null || waveBuffer.MaxSize < buffer.Length)
-            {
-                waveBuffer = new WaveBuffer(buffer.Length);
-            }
-
-            int bytesRead = source.Read(waveBuffer, 0, buffer.Length);
+            int bytesRead = _source.Read(_waveBuffer, 0, buffer.Length);
 
             if (bytesRead > 0)
             {
@@ -47,7 +42,7 @@ namespace GuitarTurner
 
             int frames = bytesRead / sizeof(float);
 
-            return pitchDetector.DetectPitch(waveBuffer.FloatBuffer, frames);
+            return _pitchDetector.DetectPitch(_waveBuffer.FloatBuffer, frames);
         }
     }
 }
