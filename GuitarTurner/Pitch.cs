@@ -1,5 +1,4 @@
 ﻿using NAudio.Wave;
-using System;
 
 namespace GuitarTurner
 {
@@ -11,20 +10,9 @@ namespace GuitarTurner
 
         public Pitch(IWaveProvider source)
         {
-            if (source.WaveFormat.SampleRate != 44100)
-            {
-                throw new ArgumentException("Source must be at 44.1kHz");
-            }
-
-            if (source.WaveFormat.Encoding != WaveFormatEncoding.IeeeFloat)
-            {
-                throw new ArgumentException("Source must be IEEE floating point audio data");
-            }
-
-            if (source.WaveFormat.Channels != 1)
-            {
-                throw new ArgumentException("Source must be a mono input source");
-            }
+            Check.IsTrue(source.WaveFormat.SampleRate != 44100, "Source must be at 44.1kHz");
+            Check.IsTrue(source.WaveFormat.Encoding != WaveFormatEncoding.IeeeFloat, "Source must be IEEE floating point audio data");
+            Check.IsTrue(source.WaveFormat.Channels != 1, "Source must be a mono input source");
 
             _source = source;
             _pitchDetector = new Autocorrelator(source.WaveFormat.SampleRate);
