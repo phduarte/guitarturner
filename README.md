@@ -2,7 +2,7 @@
 
 Afinador de guitarra em WPF com C# e .NET 5
 
-[![CodeFactor](https://www.codefactor.io/repository/github/phduarte/guitarturner/badge)](https://www.codefactor.io/repository/github/phduarte/guitarturner)
+![.NET Core Desktop](https://github.com/phduarte/guitarturner/workflows/.NET%20Core%20Desktop/badge.svg) [![CodeFactor](https://www.codefactor.io/repository/github/phduarte/guitarturner/badge)](https://www.codefactor.io/repository/github/phduarte/guitarturner)
 
 ![arquivo](screen.png)
 
