@@ -1,5 +1,6 @@
 ﻿using NAudio.Wave;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace GuitarTurner
@@ -20,22 +21,19 @@ namespace GuitarTurner
 
             do
             {
-                Console.Clear();
-                Console.WriteLine("Please select input or recording device: ");
+                Debug.WriteLine("Please select input or recording device: ");
 
                 for (int i = 0; i < WaveInEvent.DeviceCount; i++)
                 {
-                    Console.WriteLine(i + ". " + WaveInEvent.GetCapabilities(i).ProductName);
+                    Debug.WriteLine(i + ". " + WaveInEvent.GetCapabilities(i).ProductName);
                 }
-
-                Console.WriteLine();
 
                 try
                 {
                     if (int.TryParse(Console.ReadLine(), out inputDevice))
                     {
                         isValidChoice = true;
-                        Console.WriteLine("You have chosen " + WaveInEvent.GetCapabilities(inputDevice).ProductName + ".\n");
+                        Debug.WriteLine("You have chosen " + WaveInEvent.GetCapabilities(inputDevice).ProductName + ".\n");
                     }
                     else
                     {
