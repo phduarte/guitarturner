@@ -21,7 +21,7 @@ namespace GuitarTurner
 
             do
             {
-                Debug.WriteLine("Please select input or recording device: ");
+                Debug.WriteLine(Messages.Sound.SelectInput);
 
                 for (int i = 0; i < WaveInEvent.DeviceCount; i++)
                 {
@@ -33,7 +33,7 @@ namespace GuitarTurner
                     if (int.TryParse(Console.ReadLine(), out inputDevice))
                     {
                         isValidChoice = true;
-                        Debug.WriteLine("You have chosen " + WaveInEvent.GetCapabilities(inputDevice).ProductName + ".\n");
+                        Debug.WriteLine($"{Messages.Sound.YouHaveChosen} {WaveInEvent.GetCapabilities(inputDevice).ProductName}.\n");
                     }
                     else
                     {
@@ -42,7 +42,7 @@ namespace GuitarTurner
                 }
                 catch
                 {
-                    throw new ArgumentException("Device # chosen is out of range.");
+                    throw new ArgumentException(Messages.Sound.DeviceOutOfRange);
                 }
 
             } while (isValidChoice == false);

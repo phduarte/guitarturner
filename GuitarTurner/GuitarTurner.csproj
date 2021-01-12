@@ -10,4 +10,28 @@
     <PackageReference Include="NAudio" Version="1.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Messages\Pitch.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Pitch.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Messages\Sound.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Sound.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Messages\Pitch.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Pitch.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Messages\Sound.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sound.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
