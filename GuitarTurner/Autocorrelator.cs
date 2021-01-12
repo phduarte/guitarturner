@@ -13,16 +13,13 @@
             int minFreq = 75;
             int maxFreq = 335;
 
-            this.maxOffset = sampleRate / minFreq;
-            this.minOffset = sampleRate / maxFreq;
+            maxOffset = sampleRate / minFreq;
+            minOffset = sampleRate / maxFreq;
         }
 
         public float DetectPitch(float[] buffer, int frames)
         {
-            if (prevBuffer == null)
-            {
-                prevBuffer = new float[frames];
-            }
+            prevBuffer = prevBuffer ?? new float[frames];
 
             float maxCorr = 0;
             int maxLag = 0;
