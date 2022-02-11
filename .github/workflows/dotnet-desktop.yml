@@ -16,10 +16,6 @@ jobs:
 
     runs-on: windows-latest
 
-    env:
-      Solution_Name: GuitarTurner.sln
-      Test_Project_Path: GuitarTurner\GuitarTurner.csproj
-
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -35,7 +31,8 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      run: dotnet build --no-restore /p:ContinuousIntegrationBuild=true
+      run: dotnet build --no-restore
+      #run: dotnet build --no-restore /p:ContinuousIntegrationBuild=true
 
     #- name: Execute unit tests
     #  run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
