@@ -1,6 +1,6 @@
 ﻿using NAudio.Wave;
-using System;
-using System.Diagnostics;
+//using System;
+//using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace GuitarTurner
@@ -14,45 +14,45 @@ namespace GuitarTurner
 
         public event FrequenceChanged FrequenceChanged;
 
-        public int SelectInputDevice()
-        {
-            int inputDevice = 0;
-            bool isValidChoice = false;
+        //public int SelectInputDevice()
+        //{
+        //    int inputDevice = 0;
+        //    bool isValidChoice = false;
 
-            do
-            {
-                Debug.WriteLine(Messages.Sound.SelectInput);
+        //    do
+        //    {
+        //        Debug.WriteLine(Messages.Sound.SelectInput);
 
-                for (int i = 0; i < WaveInEvent.DeviceCount; i++)
-                {
-                    Debug.WriteLine(i + ". " + WaveInEvent.GetCapabilities(i).ProductName);
-                }
+        //        for (int i = 0; i < WaveInEvent.DeviceCount; i++)
+        //        {
+        //            Debug.WriteLine(i + ". " + WaveInEvent.GetCapabilities(i).ProductName);
+        //        }
 
-                try
-                {
-                    if (int.TryParse(Console.ReadLine(), out inputDevice))
-                    {
-                        isValidChoice = true;
-                        Debug.WriteLine($"{Messages.Sound.YouHaveChosen} {WaveInEvent.GetCapabilities(inputDevice).ProductName}.\n");
-                    }
-                    else
-                    {
-                        isValidChoice = false;
-                    }
-                }
-                catch
-                {
-                    throw new ArgumentException(Messages.Sound.DeviceOutOfRange);
-                }
+        //        try
+        //        {
+        //            if (int.TryParse(Console.ReadLine(), out inputDevice))
+        //            {
+        //                isValidChoice = true;
+        //                Debug.WriteLine($"{Messages.Sound.YouHaveChosen} {WaveInEvent.GetCapabilities(inputDevice).ProductName}.\n");
+        //            }
+        //            else
+        //            {
+        //                isValidChoice = false;
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            throw new ArgumentException(Messages.Sound.DeviceOutOfRange);
+        //        }
 
-            } while (isValidChoice == false);
+        //    } while (isValidChoice == false);
 
-            return inputDevice;
-        }
+        //    return inputDevice;
+        //}
 
         public void StartDetect(int inputDevice)
         {
-            WaveInEvent waveIn = new WaveInEvent();
+            WaveInEvent waveIn = new();
 
             waveIn.DeviceNumber = inputDevice;
             waveIn.WaveFormat = new WaveFormat(44100, 1);
@@ -64,7 +64,7 @@ namespace GuitarTurner
             waveIn.StartRecording();
 
             IWaveProvider stream = new Wave16ToFloatProvider(bufferedWaveProvider);
-            Pitch pitch = new Pitch(stream);
+            Pitch pitch = new(stream);
 
             byte[] buffer = new byte[8192];
             int bytesRead;
@@ -86,9 +86,9 @@ namespace GuitarTurner
             waveIn.Dispose();
         }
 
-        public void StartDetectAsync(int inputDevice)
+        public Task StartDetectAsync(int inputDevice)
         {
-            Task.Factory.StartNew(() =>
+            return Task.Factory.StartNew(() =>
             {
                 StartDetect(inputDevice);
             });

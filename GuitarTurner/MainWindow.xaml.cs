@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace GuitarTurner
 {
@@ -20,24 +7,18 @@ namespace GuitarTurner
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Sound _sound = new Sound();
-        public TurnerViewModel turner = new TurnerViewModel();
+        private readonly Sound _sound = new();
+        public TurnerViewModel turner = new();
 
         public MainWindow()
         {
             InitializeComponent();
-            _sound.FrequenceChanged += _sound_FrequenceChanged;
-            //_sound.NoteFound += _sound_NoteFound;
+            _sound.FrequenceChanged += Sound_FrequenceChanged;
 
             DataContext = turner;
         }
 
-        //private void _sound_NoteFound(string note, float frequency)
-        //{
-        //    turner.Note = note;
-        //}
-
-        private void _sound_FrequenceChanged(float frequency)
+        private void Sound_FrequenceChanged(float frequency)
         {
             turner.Frequency = frequency;
         }

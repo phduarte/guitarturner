@@ -5,8 +5,8 @@ namespace GuitarTurner
 {
     static class Notes
     {
-        static List<NoteFrequency> noteBaseFreqs = new List<NoteFrequency>
-            {
+        static readonly List<NoteFrequency> noteBaseFreqs = new()
+        {
                 new NoteFrequency{ Key = "C", Frequency= 16.35f, IsBass = false, IsGuitar = false, IsUkulele = false },
                 new NoteFrequency{ Key = "C#", Frequency= 17.32f , IsBass = false, IsGuitar = false, IsUkulele = false },
                 new NoteFrequency{ Key = "D", Frequency= 18.35f , IsBass = true, IsGuitar = true, IsUkulele = false },

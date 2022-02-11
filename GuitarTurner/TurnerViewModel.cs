@@ -6,7 +6,7 @@ namespace GuitarTurner
 {
     public class TurnerViewModel : INotifyPropertyChanged
     {
-        static List<Note> _notes = new List<Note>();
+        static readonly List<Note> _notes = new();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -93,7 +93,7 @@ namespace GuitarTurner
             }
         }
 
-        private Note FindNote(float freq)
+        private static Note FindNote(float freq)
             => _notes.OrderBy(x => x.Distance(freq)).First();
     }
 }
