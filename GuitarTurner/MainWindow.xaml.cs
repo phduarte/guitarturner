@@ -8,25 +8,25 @@ namespace GuitarTurner
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Sound _sound = new();
-        public TurnerViewModel turner = new();
+        private readonly SoundListner _sound = new();
+        public TurnerViewModel _turner = new();
 
         public MainWindow()
         {
             InitializeComponent();
             _sound.FrequenceChanged += Sound_FrequenceChanged;
 
-            DataContext = turner;
+            DataContext = _turner;
         }
 
         private void Sound_FrequenceChanged(float frequency)
         {
-            turner.Frequency = frequency;
+            _turner.Frequency = frequency;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _sound.StartDetectAsync(0);
+            _sound.StartAsync(0);
         }
     }
 }

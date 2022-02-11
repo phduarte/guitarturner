@@ -7,10 +7,10 @@ namespace GuitarTurner.Infra
 {
     public delegate void FrequenceChanged(float frequency);
 
-    public class Sound
+    public class SoundListner
     {
-        BufferedWaveProvider bufferedWaveProvider = null;
-        private bool exit;
+        private BufferedWaveProvider _bufferedWaveProvider = null;
+        private bool _exit;
 
         public event FrequenceChanged FrequenceChanged;
 
@@ -50,61 +50,64 @@ namespace GuitarTurner.Infra
         //    return inputDevice;
         //}
 
-        public void StartDetect(int inputDevice)
+        public void Start(int inputDevice)
         {
-            WaveInEvent waveIn = new();
+            WaveInEvent waveIn = new()
+            {
+                DeviceNumber = inputDevice,
+                WaveFormat = new WaveFormat(44100, 1),
+            };
 
-            waveIn.DeviceNumber = inputDevice;
-            waveIn.WaveFormat = new WaveFormat(44100, 1);
             waveIn.DataAvailable += WaveIn_DataAvailable;
 
-            bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
+            _bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
 
             // begin record
             waveIn.StartRecording();
 
-            IWaveProvider stream = new Wave16ToFloatProvider(bufferedWaveProvider);
-            Pitch pitch = new(stream);
+            const int bufferSize = 8192;
+            IWaveProvider stream = new Wave16ToFloatProvider(_bufferedWaveProvider);
+            PitchDetector pitchDetector = new(stream, bufferSize);
+            byte[] buffer = new byte[bufferSize];
 
-            byte[] buffer = new byte[8192];
             int bytesRead;
 
             do
             {
                 bytesRead = stream.Read(buffer, 0, buffer.Length);
 
-                float freq = pitch.Get(buffer);
+                float frequency = pitchDetector.Detect(buffer);
 
-                if (freq != 0)
+                if (frequency != 0)
                 {
-                    FrequenceChanged?.Invoke(freq);
+                    FrequenceChanged?.Invoke(frequency);
                 }
 
-            } while (bytesRead != 0 || !exit);
+            } while (bytesRead != 0 || !_exit);
 
             waveIn.StopRecording();
             waveIn.Dispose();
         }
 
-        public Task StartDetectAsync(int inputDevice)
+        public Task StartAsync(int inputDevice)
         {
             return Task.Factory.StartNew(() =>
             {
-                StartDetect(inputDevice);
+                Start(inputDevice);
             });
         }
 
         public void Stop()
         {
-            exit = true;
+            _exit = true;
         }
 
         void WaveIn_DataAvailable(object sender, WaveInEventArgs e)
         {
-            if (bufferedWaveProvider != null)
+            if (_bufferedWaveProvider != null)
             {
-                bufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
-                bufferedWaveProvider.DiscardOnBufferOverflow = true;
+                _bufferedWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
+                _bufferedWaveProvider.DiscardOnBufferOverflow = true;
             }
         }
     }
