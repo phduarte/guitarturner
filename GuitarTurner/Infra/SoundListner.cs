@@ -76,7 +76,7 @@ namespace GuitarTurner.Infra
             {
                 bytesRead = stream.Read(buffer, 0, buffer.Length);
 
-                float frequency = pitchDetector.Detect(buffer);
+                float frequency = pitchDetector.Analyze(buffer);
 
                 if (frequency != 0)
                 {

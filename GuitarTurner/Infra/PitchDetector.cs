@@ -28,7 +28,7 @@ namespace GuitarTurner.Infra
             _minOffset = waveProvider.WaveFormat.SampleRate / maxFreq;
         }
 
-        public float Detect(byte[] buffer)
+        public float Analyze(byte[] buffer)
         {
             int bytesRead = _waveProvider.Read(_waveBuffer, 0, buffer.Length);
 
@@ -42,7 +42,7 @@ namespace GuitarTurner.Infra
             return Detect(_waveBuffer.FloatBuffer, frames);
         }
 
-        public float Detect(float[] buffer, int frames)
+        private float Detect(float[] buffer, int frames)
         {
             _prevBuffer ??= new float[frames];
 
