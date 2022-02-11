@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using GuitarTurner.Infra;
+using System.Windows;
 
 namespace GuitarTurner
 {

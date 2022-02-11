@@ -1,15 +1,15 @@
-﻿namespace GuitarTurner
+﻿namespace GuitarTurner.Infra
 {
     class Autocorrelator
     {
-        float[] prevBuffer;
-        int minOffset;
-        int maxOffset;
-        float sampleRate;
+        private float[] prevBuffer;
+        private readonly int minOffset;
+        private readonly int maxOffset;
+        private readonly float sampleRate;
 
         public Autocorrelator(int sampleRate)
         {
-            this.sampleRate = (float)sampleRate;
+            this.sampleRate = sampleRate;
             int minFreq = 75;
             int maxFreq = 335;
 
@@ -19,7 +19,7 @@
 
         public float DetectPitch(float[] buffer, int frames)
         {
-            prevBuffer = prevBuffer ?? new float[frames];
+            prevBuffer ??= new float[frames];
 
             float maxCorr = 0;
             int maxLag = 0;

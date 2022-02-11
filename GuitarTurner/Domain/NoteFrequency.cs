@@ -1,4 +1,4 @@
-﻿namespace GuitarTurner
+﻿namespace GuitarTurner.Domain
 {
     record NoteFrequency
     {

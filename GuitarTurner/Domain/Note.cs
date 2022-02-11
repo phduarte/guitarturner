@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GuitarTurner
+namespace GuitarTurner.Domain
 {
     record Note
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace GuitarTurner
+namespace GuitarTurner.Domain
 {
     static class Notes
     {

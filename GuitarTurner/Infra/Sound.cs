@@ -3,7 +3,7 @@
 //using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace GuitarTurner
+namespace GuitarTurner.Infra
 {
     public delegate void FrequenceChanged(float frequency);
 

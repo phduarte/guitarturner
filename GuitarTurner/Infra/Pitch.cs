@@ -1,7 +1,7 @@
 ﻿using NAudio.Wave;
 using Text = GuitarTurner.Messages.Pitch;
 
-namespace GuitarTurner
+namespace GuitarTurner.Infra
 {
     public class Pitch
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GuitarTurner.Domain;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
