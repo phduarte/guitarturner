@@ -8,27 +8,27 @@ Afinador de guitarra em WPF com C# e .NET 5
 
 ## Listen and Detect Pitch
 
-O princípio desse afinador é simples que contém apenas 2 componentes que executam os seguintes papeis, um ouvinte e um analisador de frequências.
+O princÃ­pio desse afinador Ã© simples, ele contÃ©m apenas 2 componentes, um ouvinte e um analisador de frequÃªncias.
 
 ### SoundListner
 
-O monitor `SoundListner`, é responsável por ouvir todas as entradas sonoras de uma entrada de áudio do computador.
+O `SoundListner` Ã© responsÃ¡vel por ouvir todos os sinais sonoros de uma determinada entrada de Ã¡udio do computador.
 
-Algumas características dessa classe incluem:
+Algumas caracterÃ­sticas dessa classe incluem:
 
-- É uma classe facade (ACL)
-- Possui um método assíncrono que fica rodando até que a aplicação pare.
+- Ã‰ uma classe facade (ACL)
 - Utiliza a biblioteca NAudio para transcrever as ondas sonoras em stream de bytes.
-- Utiliza um analisador de frequências para detectar notas coincidentes com a afinação de uma guitarra.
+- Possui um mÃ©todo assÃ­ncrono que fica rodando em loop enquanto a aplicaÃ§Ã£o estiver em execuÃ§Ã£o.
+- AtravÃ©s de um analisador de frequÃªncias, detecta se os sinais sonoros correspondem a uma notas musical.
 
 ### PitchDetector
 
-Basicamente, é o responsável por encontrar frequências dentro de amostras sonoras.
+Ã‰ o responsÃ¡vel por encontrar frequÃªncias dentro de amostras sonoras.
 
-Suas características são:
+Suas caracterÃ­sticas sÃ£o:
 
 - Realiza a leitura da amostra de som.
-- Analisa os valores da amostra a fim de detectar qual a frequência.
+- Analisa os valores da amostra a fim de detectar qual a frequÃªncia.
 
 ## Requisitos
 
@@ -37,4 +37,4 @@ Suas características são:
 
 ## Referencias
 
-Agradecimentos especiais à biblioteca NAudio que tornou possível esse projeto.
+Agradecimentos especiais Ã  biblioteca NAudio que tornou possÃ­vel esse projeto.
